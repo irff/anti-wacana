@@ -68,7 +68,7 @@ app.delete('/api/todos/:todo_id', function(req, res) {
 			if(err) {
 				res.send(err);
 			}
-			res.json(todo);
+			res.json(todos);
 		});
 	});
 });
