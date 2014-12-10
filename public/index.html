@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="antiWacana">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Anti Wacana</title>
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.4.7/css/normalize.min.css">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.4.7/css/foundation.min.css">
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular.min.js"></script>
+	<script src="core.js"></script>
+	
+</head>
+<body ng-controller="mainController">
+	<header>
+		<div class="row">
+			<div class="large-12">
+				<h1>Anti Wacana App</h1>		
+			</div>
+		</div>
+	</header>
+
+	<div class="row">
+		<div class="large-12">
+			<h2>Jumlah Wacana = {{ todos.length }}</h2>
+			
+			<div class="checkbox" ng-repeat="todo in todos">
+				{{ todo.text }}
+				<button>ng-click="deleteTodo(todo.id)">Delete</button>
+			</div>		
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="large-6">
+			<h2>Tambah Wacana</h2>
+
+			<input type="text" placeholder="Ngerjain tugas" ng-model="formData.text">
+			<button ng-click="createTodo()">Tambah</button>					
+		</div>
+	</div>
+
+</body>
+</html>

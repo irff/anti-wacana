@@ -39,6 +39,7 @@ app.post('/api/todos', function(req, res) {
 		text : req.body.text,
 		done : false
 	}, function(err, todo) {
+		console.log(todo);
 		if(err) {
 			res.send(err);
 		}
@@ -69,7 +70,9 @@ app.delete('/api/todos/:todo_id', function(req, res) {
 	});
 });
 
-
+app.get('*', function(req, res) {
+	res.sendFile('./public/index.html');
+})
 
 app.listen(8080);
 
