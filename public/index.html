@@ -9,7 +9,7 @@
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular.min.js"></script>
 	<script src="core.js"></script>
-	
+
 </head>
 <body ng-controller="mainController">
 	<header>
@@ -26,7 +26,7 @@
 			
 			<div class="checkbox" ng-repeat="todo in todos">
 				{{ todo.text }}
-				<button>ng-click="deleteTodo(todo.id)">Delete</button>
+				<button class="tiny" ng-click="deleteTodo(todo.id)">Delete</button>
 			</div>		
 		</div>
 	</div>
@@ -36,7 +36,7 @@
 			<h2>Tambah Wacana</h2>
 
 			<input type="text" placeholder="Ngerjain tugas" ng-model="formData.text">
-			<button ng-click="createTodo()">Tambah</button>					
+			<button class="tiny" ng-click="createTodo()">Tambah</button>					
 		</div>
 	</div>
 
