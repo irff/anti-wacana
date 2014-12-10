@@ -1,0 +1,14 @@
+{
+	"name"			: "anti-wacana",
+	"version"		: "0.0.0",
+	"description"	: "To do list anti-wacana",
+	"main"			: "server.js",
+	"author"		: "Tri Ahmad Irfan",
+	"dependencies"	: {
+		"express" 			: "~4.10.4",
+		"mongoose"			: "~3.8.20",
+		"morgan"			: "~1.5.0",
+		"body-parser"		: "~1.10.0",
+		"method-override" 	: "~2.3.0"
+	}
+}
