@@ -5,6 +5,8 @@ var morgan  	= require('morgan');
 var bodyParser	= require('body-parser');
 var methodOverride = require('method-override');
 
+app.set('port', (process.env.PORT || 5000))
+
 mongoose.connect('mongodb://admin:sampahbanget@proximus.modulusmongo.net:27017/a4nuziJo');
 
 app.use(express.static(__dirname + '/public'));
@@ -73,9 +75,8 @@ app.delete('/api/todos/:todo_id', function(req, res) {
 
 app.get('*', function(req, res) {
 	res.sendFile('./public/index.html');
-})
+});
 
-app.listen(8080);
-
-console.log('App listening on port 8080');
-
+app.listen(app.get('port'), function() {
+  console.log("Node app is running at localhost:" + app.get('port'))
+});
