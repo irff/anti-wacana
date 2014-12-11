@@ -2,13 +2,13 @@ var newrelic	= require('newrelic');
 var express 	= require('express');
 var app 		= express();
 var mongoose 	= require('mongoose');
+var port 		= process.env.PORT || 5000;
+var database	= require('./config/database');
 var morgan  	= require('morgan');
 var bodyParser	= require('body-parser');
 var methodOverride = require('method-override');
 
-app.set('port', (process.env.PORT || 5000))
-
-mongoose.connect('mongodb://admin:sampahbanget@proximus.modulusmongo.net:27017/a4nuziJo');
+mongoose.connect(database.url);
 
 app.use(express.static(__dirname + '/public'));
 
@@ -22,62 +22,10 @@ app.use(bodyParser.json({ type : 'application/vnd.api+json' }));
 
 app.use(methodOverride());
 
-var Todo = mongoose.model('Todo', {
-	text: String
-});
+// Load routes
 
-// routes
+require('./app/routes.js')(app);
 
-app.get('/api/todos', function(req, res) {
-	Todo.find(function(err, todos) {
-		if(err) {
-			res.send(err);
-		}
-		res.json(todos);
-	});
-});
-
-app.post('/api/todos', function(req, res) {
-	console.log('yes');
-	Todo.create({
-		text : req.body.text,
-		done : false
-	}, function(err, todo) {
-		console.log(todo);
-		if(err) {
-			res.send(err);
-		}
-
-		Todo.find(function(err, todos) {
-			if(err) {
-				res.send(err);
-			}
-			res.json(todos);
-		});
-	});
-});
-
-app.delete('/api/todos/:todo_id', function(req, res) {
-	Todo.remove({
-		_id : req.params.todo_id
-	}, function(err, todo) {
-		if(err) {
-			res.send(err);
-		}
-
-		Todo.find(function(err, todos) {
-			if(err) {
-				res.send(err);
-			}
-			res.json(todos);
-		});
-	});
-});
-
-app.get('*', function(req, res) {
-	res.sendFile('./public/index.html');
-});
-
-app.listen(app.get('port'), function() {
-  console.log("Node app is running at localhost:" + app.get('port'))
+app.listen(port, function() {
+  console.log("Node app is running at localhost:" + port);
 });
