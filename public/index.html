@@ -6,15 +6,12 @@
 	<title>Anti Wacana</title>
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.4.7/css/normalize.min.css">
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.4.7/css/foundation.min.css">
+	<link rel="stylesheet" href="css/pikaday.css">
+	<link rel="stylesheet" href="css/jquery.timepicker.css">
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular.min.js"></script>
-
-	<script src="js/controllers/main.js"></script>
-	<script src="js/services/todos.js"></script>
-	<script src="js/core.js"></script>
-
 </head>
-<body ng-controller="mainController">
+<body ng-controller="wacanaController">
 	<header>
 		<div class="row">
 			<div class="large-12">
@@ -24,24 +21,50 @@
 	</header>
 
 	<div class="row">
+		<div class="large-6">
+			<h2>Tambah Wacana</h2>
+			<div class="row">
+				<div class="large-12 column">
+					<input type="text" placeholder="Judul wacana" ng-model="formData.nama">
+				</div>
+				<div class="large-12 column">
+					<textarea rows="3" placeholder="Deskripsi wacana" ng-model="formData.deskripsi"></textarea>					
+					<input type="text" ng-model="formData.deadline" id="form-deadline" style="display: none;">
+				</div>
+				<div class="large-9 column">
+					<input type="text" id="datepicker" placeholder="Tanggal deadline">			
+				</div>
+				<div class="large-3 column">
+					<input type="text" id="timepicker" placeholder="Jam">			
+				</div>
+				<div class="large-12 column">
+					<button class="tiny" ng-click="createWacana()">Tambah</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
 		<div class="large-12">
-			<h2>Jumlah Wacana = {{ todos.length }}</h2>
+			<h2>Jumlah Wacana = {{ wacana.length }}</h2>
 			
-			<div class="checkbox" ng-repeat="todo in todos">
-				{{ todo.text }}
-				<button class="tiny" ng-click="deleteTodo(todo._id)">Delete</button>
+			<div class="checkbox" ng-repeat="item in wacana">
+				<p>Judul: {{ item.nama }}</p>
+				<p>Deskripsi: {{ item.deskripsi }}</p>
+				<p>Deadline: {{ item.deadline }}</p>
+				<button class="tiny" ng-click="deleteWacana(item._id)">Delete</button>
 			</div>		
 		</div>
 	</div>
 	
-	<div class="row">
-		<div class="large-6">
-			<h2>Tambah Wacana</h2>
 
-			<input type="text" placeholder="Ngerjain tugas" ng-model="formData.text">
-			<button class="tiny" ng-click="createTodo()">Tambah</button>					
-		</div>
-	</div>
-
+	<script src="js/plugins/moment.js"></script>
+	<script src="js/plugins/moment-locale-id.js"></script>
+	<script src="js/controllers/main.js"></script>
+	<script src="js/services/wacana.js"></script>
+	<script src="js/plugins/pikaday.js"></script>
+	<script src="js/plugins/pikaday.jquery.js"></script>
+	<script src="js/plugins/jquery.timepicker.js"></script>
+	<script src="js/core.js"></script>
 </body>
 </html>

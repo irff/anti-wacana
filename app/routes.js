@@ -1,50 +1,57 @@
 // routes
 
-var Todo = require('./models/todo');
+var Wacana = require('./models/wacana');
 
 module.exports = function(app) {
-	app.get('/api/todos', function(req, res) {
-		Todo.find(function(err, todos) {
+
+	// ----- GET
+	app.get('/api/wacana', function(req, res) {
+		Wacana.find(function(err, wacana) {
 			if(err) {
 				res.send(err);
 			}
-			res.json(todos);
+			res.json(wacana);
 		});
 	});
 
-	app.post('/api/todos', function(req, res) {
+	// ----- CREATE
+	app.post('/api/wacana', function(req, res) {
 		console.log('yes');
-		Todo.create({
-			text : req.body.text,
+		Wacana.create({
+			nama : req.body.nama,
+			deskripsi : req.body.deskripsi,
+			deadline : req.body.deadline,
 			done : false
-		}, function(err, todo) {
-			console.log(todo);
+		}, function(err, wacana) {
+			console.log(wacana);
+
 			if(err) {
 				res.send(err);
 			}
 
-			Todo.find(function(err, todos) {
+			Wacana.find(function(err, wacana) {
 				if(err) {
 					res.send(err);
 				}
-				res.json(todos);
+				res.json(wacana);
 			});
 		});
 	});
 
-	app.delete('/api/todos/:todo_id', function(req, res) {
-		Todo.remove({
-			_id : req.params.todo_id
-		}, function(err, todo) {
+	// ----- DELETE
+	app.delete('/api/wacana/:wacana_id', function(req, res) {
+		Wacana.remove({
+			_id : req.params.wacana_id
+		}, function(err, wacana) {
 			if(err) {
 				res.send(err);
 			}
 
-			Todo.find(function(err, todos) {
+			Wacana.find(function(err, wacana) {
 				if(err) {
 					res.send(err);
 				}
-				res.json(todos);
+				res.json(wacana);
 			});
 		});
 	});
